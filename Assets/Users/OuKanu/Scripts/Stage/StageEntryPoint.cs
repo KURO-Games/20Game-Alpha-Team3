@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class StageEntryPoint : MonoBehaviour
 {
-    [SerializeField]
-    private Transform targetEntryPoint;
+    
+    private Transform _targetEntryPoint;
 
-
-    public Vector3 GetTargetStageEntryPostion()
-    {
-        return targetEntryPoint.position;
-    }
+    public Transform TargetEntryPoint { get => _targetEntryPoint; set => _targetEntryPoint = value; }
 
     
 }
