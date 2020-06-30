@@ -27,6 +27,8 @@ public class Player_Controller : MonoBehaviour
         Transform transform = this.transform;
         Controller();
         animator.SetFloat("Move", Move_direction);
+        //テスト
+        Test_Gimmick();
     }
 
     //キー操作
@@ -68,8 +70,30 @@ public class Player_Controller : MonoBehaviour
         transform.localScale = scale;
     }
 
+    #region テスト
+    private bool Flag = false;
+    //ギミックの判定やアイテムの判定をどうするかわからないけどとりあえずおいとく
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("aaaa");
+        Flag = true;
+        Debug.Log("何かあるかも？");
     }
+
+    private void Test_Gimmick()
+    {
+        if (Flag == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                //何かしらの処理
+                Debug.Log("何か見つけた...ってなる予定らしい");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Flag = false;
+    }
+    #endregion
 }
