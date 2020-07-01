@@ -30,14 +30,14 @@ public class Player_Controller : MonoBehaviour
         //テスト
         Test_Gimmick();
     }
-
+    #region 移動処理
     //キー操作
     private void Controller()
     {
         Pos = transform.position;
         scale = transform.localScale;
         //右
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             //向き指定
             Move_direction = 1;
@@ -45,7 +45,7 @@ public class Player_Controller : MonoBehaviour
             Move_Controller();
         }
         //左
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             //向き指定
             Move_direction = -1;
@@ -53,7 +53,7 @@ public class Player_Controller : MonoBehaviour
             Move_Controller();
         }
         //停止
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             Move_direction = 0;
         }
@@ -69,13 +69,16 @@ public class Player_Controller : MonoBehaviour
         transform.position = Pos;
         transform.localScale = scale;
     }
+    #endregion
 
     #region テスト
     private bool Flag = false;
+    private GameObject Gimmick_Object;
     //ギミックの判定やアイテムの判定をどうするかわからないけどとりあえずおいとく
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Flag = true;
+        Gimmick_Object = collision.gameObject;
         Debug.Log("何かあるかも？");
     }
 
@@ -85,8 +88,9 @@ public class Player_Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                Destroy(Gimmick_Object);
                 //何かしらの処理
-                Debug.Log("何か見つけた...ってなる予定らしい");
+                Debug.Log(Gimmick_Object.name + "を見つけた");
             }
         }
     }
