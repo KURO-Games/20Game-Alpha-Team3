@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/NewMapData.asset
+Assets/NewMapData.asset.meta
+Assets/NewMapData2.asset
+Assets/NewMapData2.asset.meta
