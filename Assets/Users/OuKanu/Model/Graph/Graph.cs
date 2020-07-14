@@ -71,7 +71,8 @@ namespace OuKanu.DataStructure.Graph
         private int[,] CreateNewAdjMatrix(int vertexNum)
         {
             int num = MaxVertexCount + vertexNum;
-            int[,] matrix = new int[]
+            int[,] matrix = new int[num, num];
+            return matrix;
         }
 
 
