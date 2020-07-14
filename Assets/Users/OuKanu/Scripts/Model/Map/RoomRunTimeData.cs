@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapNodeView : NodeView
+public class RoomRunTimeData
 {
+    public RoomPointHolder roomMono;
     public List<StageEntryPoint> entryPoints;
 }

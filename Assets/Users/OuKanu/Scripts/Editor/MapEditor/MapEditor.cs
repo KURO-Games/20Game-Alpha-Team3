@@ -6,6 +6,8 @@ using System;
 using System.ComponentModel;
 using UnityEditor.Experimental;
 using Packages.Rider.Editor.Util;
+using Oukanu.Node;
+using Assets.Users.OuKanu.Model.Map;
 
 /// <summary>
 /// 地図編集エディター
@@ -13,17 +15,18 @@ using Packages.Rider.Editor.Util;
 public class MapEditor : EditorWindow, IHasCustomMenu
 {
 
-    Action<bool> _callback;
+   
 
     //いま編集しているマップ;
-    private MapData currentEditingMap;
+    private MapAssetData currentEditingMap;
 
     //エディターで表示するノード
-    private List<MapNodeData> rooms = new List<MapNodeData>();
+    private List<RoomView> rooms = new List<RoomView>();
 
 
     Vector2 scrollPos;
 
+    bool isimported = false;
 
     [MenuItem("Levels/MapEditor")]
     private static void Open()
@@ -42,7 +45,8 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
     private void OnGUI()
     {
-        currentEditingMap = EditorGUILayout.ObjectField("Source", currentEditingMap, typeof(MapData), false) as MapData;
+
+        currentEditingMap = EditorGUILayout.ObjectField("Source", currentEditingMap, typeof(MapAssetData), false) as MapAssetData;
         if (currentEditingMap == null)
         {
             if (GUILayout.Button("Create"))
@@ -55,11 +59,12 @@ public class MapEditor : EditorWindow, IHasCustomMenu
                 ImportMapData();
             }
         }
-        if (!EditorUtility.IsDirty(currentEditingMap) && currentEditingMap != null)
+        if (!isimported && currentEditingMap != null)
         {
             
             ImportMapData();
-            EditorUtility.SetDirty(currentEditingMap);
+            //EditorUtility.SetDirty(currentEditingMap);
+            isimported = true;
         }
         if (currentEditingMap == null) 
         { 
@@ -74,7 +79,7 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
         for (int i = 0; i < rooms.Count; i++)
         {
-            DrawNode(rooms[i]);
+           rooms[i].DrawNode();
         }
 
 
@@ -85,25 +90,16 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
 
         //データを保存する
-        if (GUILayout.Button("Save") == false) { return; }
-        AssetDatabase.StartAssetEditing();
-        currentEditingMap.mapNodes.Clear();
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            currentEditingMap.mapNodes.Add(rooms[i]);
-        }
-        AssetDatabase.StopAssetEditing();
-        EditorUtility.SetDirty(currentEditingMap);
-        AssetDatabase.SaveAssets();
+        if (GUILayout.Button("Refresh") == false) { return; }
+
+        isimported = false;
+        //AssetDatabase.StopAssetEditing();
+        
+        //EditorUtility.SetDirty(currentEditingMap);
+        //AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
 
-    private void DrawNode(MapNodeData mapNodeData)
-    {
-        GUI.skin = mapNodeData.skin;
-        mapNodeData.nodeRect = GUI.Window(mapNodeData.windowID, mapNodeData.nodeRect, callBack, mapNodeData.nodeName);
-        GUI.skin = null;
-    }
 
     private void callBack(int id)
     {
@@ -139,7 +135,7 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
 
         //Instance作成
-        MapData data = CreateInstance<MapData>();
+        MapAssetData data = CreateInstance<MapAssetData>();
 
         //ファイル作成
         try
@@ -157,7 +153,7 @@ public class MapEditor : EditorWindow, IHasCustomMenu
         try
         {
             //今編集しているデータとして指定
-            currentEditingMap = AssetDatabase.LoadAssetAtPath(targetFilePath, typeof(MapData)) as MapData;
+            currentEditingMap = AssetDatabase.LoadAssetAtPath(targetFilePath, typeof(MapAssetData)) as MapAssetData;
         }
         catch (NullReferenceException)
         {
@@ -174,20 +170,17 @@ public class MapEditor : EditorWindow, IHasCustomMenu
         {
             return;
         }
-        if(currentEditingMap.mapNodes == null)
+        //if(currentEditingMap.Rooms == null)
+        //{
+        //    currentEditingMap.mapNodes = new List<MapNodeData>();
+        //}
+        //rooms.Clear();
+        for (int i = 0; i < currentEditingMap.Rooms.Count; i++)
         {
-            currentEditingMap.mapNodes = new List<MapNodeData>();
-        }
-        rooms.Clear();
-        for (int i = 0; i < currentEditingMap.mapNodes.Count; i++)
-        {
-            MapNodeData data = new MapNodeData();
-            data.windowID = currentEditingMap.mapNodes[i].windowID;
-            data.skin = currentEditingMap.mapNodes[i].skin;
-            data.nodeRect = currentEditingMap.mapNodes[i].nodeRect;
-            data.nodeName = currentEditingMap.mapNodes[i].nodeName;
-            
-            rooms.Add(data);
+            RoomView view = new RoomView();
+            view.LoadDataToRuntime(currentEditingMap.Rooms[i]);
+            //view.BuildEditorModel();
+            rooms.Add(view);
         }
 
         
@@ -195,10 +188,10 @@ public class MapEditor : EditorWindow, IHasCustomMenu
     }
 
 
-    public void InitialNode(ref MapNodeData node)
+    public void InitialNode(ref RoomEditorModel node)
     {
 
-        node.nodeRect = new Rect(50, 50, 250, 250);
+        node.m_rect.m_NodeRect = new Rect(50, 50, 250, 250);
         node.skin = Resources.Load<GUISkin>("EventNode");
     }
 

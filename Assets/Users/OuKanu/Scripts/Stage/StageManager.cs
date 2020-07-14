@@ -2,18 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class StageManager : MonoBehaviour
 {
-    [SerializeField]
-    List<GameObject> StagePrefabs = new List<GameObject>();
+    [HideInInspector]
+    public StageManager instance;
 
+    [SerializeField]
+    List<RoomPointHolder> StagePrefabs = new List<RoomPointHolder>();
+
+    [HideInInspector]
     public List<GameObject> Stages;
+
+    Dictionary<int, StageEntryPoint> map = new Dictionary<int, StageEntryPoint>();
 
     private void Awake()
     {
+        instance = this;
         Stages = new List<GameObject>();
     }
 
+    private void Start()
+    {
+        foreach (var item in StagePrefabs)
+        {
+            foreach (var entry in item.GetEntryPoints())
+            {
+                map.Add(entry.MyCode, entry);
+            }
+        }
+
+        foreach (var item in map)
+        {
+            if (map.ContainsKey(item.Value.PairCode))
+            {
+                item.Value.targetpoint = map[item.Value.PairCode];
+            }
+            
+        }
+
+    }
 
     public void CreateStage(GameObject stageOrigin)
     {

@@ -5,9 +5,12 @@ using UnityEngine;
 /// <summary>
 /// 一つの部屋のプレハブ情報を格納するデータクラス
 /// </summary>
-public class RoomData : ScriptableObject
+/// 
+[CreateAssetMenu(menuName ="RoomAsset")]
+public class RoomAssetData : ScriptableObject
 {
-    public GameObject RoomPrefab;
-    public int roomID;
+    public string roomName;
+
+    public List<Vector2> entrypointoffsets = new List<Vector2>();
 
 }
