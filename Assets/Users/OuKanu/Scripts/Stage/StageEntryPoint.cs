@@ -11,7 +11,8 @@ public enum EntryPointType
 
 public class StageEntryPoint : MonoBehaviour
 {
-    
+
+    public string Myname;
 
     public EntryPointType entryPointType;
 
@@ -20,7 +21,7 @@ public class StageEntryPoint : MonoBehaviour
 
     private PlayerStageControl player;
 
-    public StageEntryPoint targetpoint;
+    public StageEntryPoint myTargetPoint;
 
     public Transform m_inTransform;
 
@@ -32,9 +33,11 @@ public class StageEntryPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(targetpoint == null)
+        if(myTargetPoint == null)
         {
             Debug.LogError("No target Point");
+            this.GetComponent<BoxCollider2D>().isTrigger = false;
+            this.gameObject.layer = LayerMask.NameToLayer("Ground");
             return;
         }
 
@@ -83,14 +86,14 @@ public class StageEntryPoint : MonoBehaviour
     public void Activate(Transform teleportItem)
     {
         Debug.Log("Start Transition!");
-        if (targetpoint == null)
+        if (myTargetPoint == null)
         {
             Debug.LogError("Transform reference Lost!");
             return;
         }
         else
         {
-            StartCoroutine(StageManager.instance.MoveToRoom(targetpoint, teleportItem));
+            StartCoroutine(StageManager.instance.MoveToRoom(myTargetPoint, teleportItem));
         }
     }
 }

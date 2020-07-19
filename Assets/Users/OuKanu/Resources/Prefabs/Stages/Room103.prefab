@@ -19117,6 +19117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054aa4e658eaa0d489e4bfaba9f9306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomName: Room103
+  roomGUID: 
   entryPoints:
   - {fileID: 6326802221524212232}
   cameraBound: {fileID: 1401999626}
@@ -25408,6 +25410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MyCode
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064295427080975263, guid: 7680a257e531b654fbe3733aa7e93fb0,
+        type: 3}
+      propertyPath: Myname
+      value: 103In
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7680a257e531b654fbe3733aa7e93fb0, type: 3}
