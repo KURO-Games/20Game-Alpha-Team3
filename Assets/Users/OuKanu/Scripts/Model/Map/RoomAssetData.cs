@@ -10,7 +10,7 @@ using UnityEngine;
 public class RoomAssetData : ScriptableObject
 {
     public string roomName;
-
-    public List<Vector2> entrypointoffsets = new List<Vector2>();
+    public Vector2 offset;
+    public List<EntryPointData> entrypointoffsets = new List<EntryPointData>();
 
 }

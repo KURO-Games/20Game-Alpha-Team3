@@ -25,14 +25,14 @@ public class RoomView : MonoBehaviour
        
         foreach (var offset in staticRoomData.entrypointoffsets)
         {
-            roomWindow.m_data.entries.Add(offset);
+            roomWindow.m_data.entries.Add(offset.offset);
 
-            roomWindow.m_rect.entryrect.Add(new Rect(offset * 10f, new Vector2(50, 50)));
+            roomWindow.m_rect.entryrect.Add(new Rect(offset.offset * 10f, new Vector2(50, 50)));
         }
 
         roomWindow.m_data.RoomName = staticRoomData.roomName;
-        roomWindow.m_rect.m_NodeRect = new Rect(Vector2.zero, new Vector2(250,250));
-        roomWindow.m_rect.messageRect = new Rect(roomWindow.m_rect.m_NodeRect.center, new Vector2(150, 50));
+        roomWindow.m_rect.m_NodeRect = new Rect(Vector2.zero, new Vector2(100,100));
+        roomWindow.m_rect.messageRect = new Rect(new Vector2(25, 25), new Vector2(50, 50));
         roomWindow.skin = Resources.Load<GUISkin>("EventNode");
         roomWindow.windowID = 0;
 
@@ -49,11 +49,12 @@ public class RoomView : MonoBehaviour
     private void Window(int id)
     {
         
-        Rect ms = new Rect(Vector2.zero, new Vector2(50, 50));
+        Rect ms = new Rect(Vector2.zero, new Vector2(25, 25));
         GUI.Box(ms,GUIContent.none);
+        GUI.TextField(roomWindow.m_rect.messageRect, "000");
         for (int i = 0; i < roomWindow.m_data.entries.Count; i++)
         {
-            Rect re = new Rect(new Vector2(0,100), new Vector2(50, 50)); 
+            Rect re = new Rect(new Vector2(100,100), new Vector2(5, 5)); 
             GUI.Box(re,texture,GUIStyle.none);
         }
         

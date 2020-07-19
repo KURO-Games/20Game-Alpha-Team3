@@ -17,6 +17,7 @@ public class UnityChan2DController : MonoBehaviour
 
     private State m_state = State.Normal;
 
+
     void Reset()
     {
         Awake();
@@ -51,11 +52,24 @@ public class UnityChan2DController : MonoBehaviour
 
     void Update()
     {
-        if (m_state != State.Damaged)
+        if (m_state != State.Damaged && m_state != State.CantMove)
         {
             float x = Input.GetAxis("Horizontal");
             bool jump = Input.GetButtonDown("Jump");
             Move(x, jump);
+        }
+    }
+
+    public void SetPlayerControl(bool enable)
+    {
+        if (enable)
+        {
+            m_state = State.Normal;
+        }
+        else
+        {
+            m_state = State.CantMove;
+            Move(0, false);
         }
     }
 
@@ -124,10 +138,11 @@ public class UnityChan2DController : MonoBehaviour
         m_state = State.Normal;
     }
 
-    enum State
+    public enum State
     {
         Normal,
         Damaged,
         Invincible,
+        CantMove
     }
 }

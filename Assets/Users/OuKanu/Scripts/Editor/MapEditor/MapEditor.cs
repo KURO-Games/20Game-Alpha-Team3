@@ -19,7 +19,8 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
     //いま編集しているマップ;
     private MapAssetData currentEditingMap;
-
+    
+    //private  
     //エディターで表示するノード
     private List<RoomView> rooms = new List<RoomView>();
 
@@ -45,7 +46,7 @@ public class MapEditor : EditorWindow, IHasCustomMenu
 
     private void OnGUI()
     {
-
+        EditorGUI.BeginChangeCheck();
         currentEditingMap = EditorGUILayout.ObjectField("Source", currentEditingMap, typeof(MapAssetData), false) as MapAssetData;
         if (currentEditingMap == null)
         {
@@ -59,6 +60,8 @@ public class MapEditor : EditorWindow, IHasCustomMenu
                 ImportMapData();
             }
         }
+        EditorGUI.EndChangeCheck();
+        EditorGUI.BeginChangeCheck();
         if (!isimported && currentEditingMap != null)
         {
             
@@ -66,13 +69,14 @@ public class MapEditor : EditorWindow, IHasCustomMenu
             //EditorUtility.SetDirty(currentEditingMap);
             isimported = true;
         }
+        
         if (currentEditingMap == null) 
         { 
             return; 
         }
 
-        
-
+        EditorGUI.EndChangeCheck();
+        EditorGUI.BeginChangeCheck();
         scrollPos = GUI.BeginScrollView(new Rect(0, 100, position.width, position.height - 100), scrollPos, new Rect(0, 0, 1000, Screen.height));
 
         BeginWindows();
@@ -86,9 +90,10 @@ public class MapEditor : EditorWindow, IHasCustomMenu
         EndWindows();
 
         GUI.EndScrollView();
+        EditorGUI.EndChangeCheck();
+        EditorGUI.BeginChangeCheck();
 
-
-
+        
         //データを保存する
         if (GUILayout.Button("Refresh") == false) { return; }
 

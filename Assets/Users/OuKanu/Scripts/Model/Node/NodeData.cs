@@ -10,9 +10,6 @@ namespace Oukanu.Node
         public int windowID = 0;
         public Rect nodeRect;
         public GUISkin skin;
-
-
-
     }
 
 

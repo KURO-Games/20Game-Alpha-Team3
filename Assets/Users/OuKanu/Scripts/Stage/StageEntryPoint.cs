@@ -11,7 +11,7 @@ public enum EntryPointType
 
 public class StageEntryPoint : MonoBehaviour
 {
-    private bool entrypoint = false;
+    
 
     public EntryPointType entryPointType;
 
@@ -22,6 +22,9 @@ public class StageEntryPoint : MonoBehaviour
 
     public StageEntryPoint targetpoint;
 
+    public Transform m_inTransform;
+
+
     public Vector3 RelativePos
     {
         get => transform.localPosition;
@@ -29,20 +32,32 @@ public class StageEntryPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
+        if(targetpoint == null)
+        {
+            Debug.LogError("No target Point");
+            return;
+        }
+
+        Debug.Log("triggered " + collision.name);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("Player In!");
             player = collision.GetComponent<PlayerStageControl>();
-            player.entrypoint = this;
+            if(player == null)
+            {
+                Debug.LogError("Get Player False");
+                return;
+            }
             if (entryPointType == EntryPointType.NeedActive)
             {
-                
+                player.entrypoint = this;
+                player.DisplayUI(true);
                 return;
             }
             
             if(entryPointType == EntryPointType.AutoTrigger)
             {
-                if (entrypoint) return;
+                
                 Activate(player.transform);
                 return;
             }
@@ -51,21 +66,31 @@ public class StageEntryPoint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        Debug.Log("Somthing Exit!");
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-
+            Debug.Log("Player Exit!");
             player.entrypoint = null;
+            if(entryPointType == EntryPointType.NeedActive)
+            {
+                player.DisplayUI(false);
+            }
             player = null;
-            entrypoint = false;
+            
         }
     }
 
     public void Activate(Transform teleportItem)
     {
-        if (targetpoint != null)
+        Debug.Log("Start Transition!");
+        if (targetpoint == null)
         {
-            teleportItem.position = targetpoint.transform.position;
-            targetpoint.entrypoint = true;
+            Debug.LogError("Transform reference Lost!");
+            return;
+        }
+        else
+        {
+            StartCoroutine(StageManager.instance.MoveToRoom(targetpoint, teleportItem));
         }
     }
 }

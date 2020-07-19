@@ -41,12 +41,14 @@ namespace OuKanu.DataStructure.Graph
         int LastVertPos = 0;
 
 
-        int MaxVertexCount;
+
+        private  int MaxVertexCount;
         /// <summary>
         /// 初期化
         /// </summary>
         public Graph()
         {
+            
             adjMatrix = new int[initialVertMatrixLength, initialVertMatrixLength];
             vertices = new List<Vertex<T>>();
 
@@ -74,7 +76,6 @@ namespace OuKanu.DataStructure.Graph
             int[,] matrix = new int[num, num];
             return matrix;
         }
-
 
         /// <summary>
         /// 頂点Add
