@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
@@ -16,7 +17,6 @@ public class UnityChan2DController : MonoBehaviour
     private const float m_centerY = 1.5f;
 
     private State m_state = State.Normal;
-
 
     void Reset()
     {
@@ -52,24 +52,11 @@ public class UnityChan2DController : MonoBehaviour
 
     void Update()
     {
-        if (m_state != State.Damaged && m_state != State.CantMove)
+        if (m_state != State.Damaged && m_state!= State.CantMove)
         {
             float x = Input.GetAxis("Horizontal");
             bool jump = Input.GetButtonDown("Jump");
             Move(x, jump);
-        }
-    }
-
-    public void SetPlayerControl(bool enable)
-    {
-        if (enable)
-        {
-            m_state = State.Normal;
-        }
-        else
-        {
-            m_state = State.CantMove;
-            Move(0, false);
         }
     }
 
@@ -92,6 +79,19 @@ public class UnityChan2DController : MonoBehaviour
             m_animator.SetTrigger("Jump");
             SendMessage("Jump", SendMessageOptions.DontRequireReceiver);
             m_rigidbody2D.AddForce(Vector2.up * jumpPower);
+        }
+    }
+
+    internal void SetPlayerControl(bool enable)
+    {
+        if (enable)
+        {
+            m_state = State.Normal;
+        }
+        else
+        {
+            m_state = State.CantMove;
+            Move(0, false);
         }
     }
 
@@ -138,7 +138,7 @@ public class UnityChan2DController : MonoBehaviour
         m_state = State.Normal;
     }
 
-    public enum State
+    enum State
     {
         Normal,
         Damaged,
