@@ -25,7 +25,7 @@ public class PlayerStageControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 entrypoint.Activate(this.transform);
-                entrypoint = entrypoint.targetpoint;
+                entrypoint = entrypoint.myTargetPoint;
                 currentroom = entrypoint.GetComponentInParent<RoomPointHolder>();
             }
         }
