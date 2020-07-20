@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Experimental.TerrainAPI;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -10,16 +12,16 @@ public class SceneLoader : MonoBehaviour
 
     List<RoomPointHolder> rooms = new List<RoomPointHolder>();
 
-    private void Start()
-    {
-        InstatiateRoom();
-        LinkRooms();
-    }
+    
 
    
 
-    private void InstatiateRoom()
+   
+
+    public void InstatiateRoom()
     {
+        rooms = new List<RoomPointHolder>();
+
         foreach (var roomNode in container.nodedata)
         {
             var roomObj = Instantiate(roomNode.roomType.RoomPrefab,new Vector3(roomNode.Position.x*0.5f, -roomNode.Position.y*0.5f,0),Quaternion.identity);
@@ -30,7 +32,7 @@ public class SceneLoader : MonoBehaviour
     }
 
 
-    private void LinkRooms()
+    public void LinkRooms()
     {
 
         for (int i = 0; i < rooms.Count; i++)
@@ -64,5 +66,7 @@ public class SceneLoader : MonoBehaviour
         from.myTargetPoint = to;
         to.myTargetPoint = from;
     }
+
+
 
 }
