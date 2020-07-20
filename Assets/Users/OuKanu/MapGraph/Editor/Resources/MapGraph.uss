@@ -7,6 +7,11 @@ GridBackground{
 
 ObjectField{
     min-width :300px;
+    max-width :300px;
 }
 
-
+.unity-base-field__label{
+    min-width :100px;
+    max-width :100px;
+    color : #000000;
+}
