@@ -2,41 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class StageManager : MonoBehaviour
 {
-    [SerializeField]
-    List<GameObject> StagePrefabs = new List<GameObject>();
+    public Cinemachine.CinemachineConfiner cameraconfiner;
+    public FadeInCanvas fadecanvas;
+    
+    [HideInInspector]
+    public static StageManager instance;
 
-    public List<GameObject> Stages;
+
+    
+    
 
     private void Awake()
     {
-        Stages = new List<GameObject>();
+        instance = this;
+        
     }
 
-
-    public void CreateStage(GameObject stageOrigin)
+    private void Start()
     {
-        var stage = Instantiate<GameObject>(stageOrigin);
-        Stages.Add(stage);
-        stage.SetActive(false);
+        
+
     }
 
-    public void LoadStage(GameObject stage,Vector3 position)
-    {
-        stage.transform.position = position;
-        stage.SetActive(true);
-    }
+    
 
-    public void UnloadStage(GameObject stage)
+    public IEnumerator MoveToRoom(StageEntryPoint point,Transform player)
     {
-        stage.SetActive(false);
-    }
+        //diable move
+        var control = player.GetComponent<UnityChan2DController>();
+        control.SetPlayerControl(false);
+        //start fadein
+        yield return StartCoroutine(fadecanvas.DoFadeIn(1,1));
+        //teleport player
+        player.transform.position = point.m_inTransform.position;
+        //set room camera confiner
+        var confiner = point.GetComponentInParent<RoomPointHolder>().cameraBound;
+        if (confiner)
+            cameraconfiner.m_BoundingShape2D = confiner;
 
-    public void DeleteStage(GameObject stage)
-    {
-        Stages.Remove(stage);
-        Destroy(stage);
+        //start fadeout
+        yield return StartCoroutine(fadecanvas.DoFadeIn(1, 0));
+        //enable move
+        control.SetPlayerControl(true);
+
     }
 
 }

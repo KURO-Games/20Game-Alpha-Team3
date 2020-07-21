@@ -678,6 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 1204117384}
+  NextScene: Stage1
 --- !u!4 &2009513924
 Transform:
   m_ObjectHideFlags: 0

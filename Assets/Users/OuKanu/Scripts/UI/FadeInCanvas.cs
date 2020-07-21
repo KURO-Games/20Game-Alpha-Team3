@@ -6,40 +6,31 @@ using UnityEngine;
 public class FadeInCanvas : MonoBehaviour
 {
     public float alpha = 0f;
+    public bool m_IsFading = false;
 
     private CanvasGroup mCanvasGroup;
 
-    private float deltaAlpha = 0f;
 
-
-    public void DoFadeIn(float time)
+    public IEnumerator DoFadeIn(float time,float targetAlpha)
     {
-        deltaAlpha = 1.0f / time;
+
+        m_IsFading = true;
+        float fadeSpeed = Mathf.Abs(mCanvasGroup.alpha - targetAlpha) / time;
+        while (!Mathf.Approximately(mCanvasGroup.alpha, targetAlpha))
+        {
+            mCanvasGroup.alpha = Mathf.MoveTowards(mCanvasGroup.alpha, targetAlpha,
+                fadeSpeed * Time.deltaTime);
+            yield return null;
+        }
+        mCanvasGroup.alpha = 0;
+        m_IsFading = false;
+        
     }
 
-    public void DoFadeOut(float time)
-    {
-        deltaAlpha = -1.0f / time;
-    }
-
-    public void SetFadeAlpha(float alphaPercent)
-    {
-        deltaAlpha = 0;
-        alpha = alphaPercent / 100f;
-        alpha = Mathf.Clamp01(alpha);
-    }
-
-    
     void Start()
     {
         mCanvasGroup = GetComponent<CanvasGroup>();
     }
 
-    
-    void Update()
-    {
-        alpha += deltaAlpha;
-        alpha = Mathf.Clamp01(alpha);
-        mCanvasGroup.alpha = alpha;
-    }
+   
 }
