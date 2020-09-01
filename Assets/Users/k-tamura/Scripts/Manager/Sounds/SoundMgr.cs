@@ -8,6 +8,7 @@ public class SoundMgr : SingletonMonoBehaviour<SoundMgr>
     CriAtomSource bgm = null;
     [SerializeField]
     CriAtomSource Se = null;
+    
 
     public static void PlayBGM(int cueID)
     {
@@ -29,7 +30,23 @@ public class SoundMgr : SingletonMonoBehaviour<SoundMgr>
     {
         return Instance.Se.status;
     }
-    //public static void 
+    /// <summary>
+    /// 再生時間を任意の形式で返すプログラム
+    /// </summary>
+    /// <typeparam name="T">default:long, float, double</typeparam>
+    /// <returns></returns>
+    public static T BGMPlayTime<T>()
+    {
+        object ret = null;
+        long _BGMTime = Instance.bgm.time;
 
+        if (typeof(T) == typeof(float))
+            ret = (float)_BGMTime;
+        else if (typeof(T) == typeof(double))
+            ret = (double)_BGMTime;
+        else
+            ret = _BGMTime;
+        return (T)ret;
+    }
 
 }
