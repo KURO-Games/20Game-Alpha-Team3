@@ -119,7 +119,7 @@ public class Player_Controller : MonoBehaviour
                     case "Lader":
                         Item[0] = true;
                         sprite = Resources.Load<Sprite>("Lader");
-                        Menu.GetComponent<MenuController>().button[Have_Item].transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+                        Menu.GetComponent<MenuController>().button[Have_Item].transform.GetChild(1).GetComponent<Image>().sprite = sprite;
                         Debug.Log("梯子を見つけた");
                         break;
                     case "Candle":
@@ -143,6 +143,7 @@ public class Player_Controller : MonoBehaviour
                         Debug.Log("謎のカギを見つけた");
                         break;
                 }
+                Have_Item++;
             }
         }
     }
@@ -181,24 +182,6 @@ public class Player_Controller : MonoBehaviour
                 Debug.Log("Close");
             }
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (Menu_Open == false)
-            {
-                Menu_Open = true;
-                Menu2.gameObject.SetActive(true);
-                Menu2.gameObject.GetComponent<MenuController>().Start_Button();
-                Move_direction = 0;
-                Debug.Log("Open");
-            }
-            else
-            {
-                Menu_Open = false;
-                Menu2.gameObject.SetActive(false);
-                Debug.Log("Close");
-            }
-        }
-        
     }
     #endregion
 }
