@@ -24983,51 +24983,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene1
       objectReference: {fileID: 0}
-    - target: {fileID: 432535477518131842, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 98.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 432535477518131842, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 100.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2899284993738923635, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 240.72682
-      objectReference: {fileID: 0}
-    - target: {fileID: 2899284993738923635, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 82.80499
-      objectReference: {fileID: 0}
-    - target: {fileID: 2899284994444058375, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 82.80499
-      objectReference: {fileID: 0}
-    - target: {fileID: 2899284994444058375, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 240.72682
-      objectReference: {fileID: 0}
-    - target: {fileID: 2899284994444058424, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6726246606298307516, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7950553653446185657, guid: 567071a586b8d534fb85c997125b5091,
-        type: 3}
-      propertyPath: RoomName
-      value: Room103
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 567071a586b8d534fb85c997125b5091, type: 3}
 --- !u!1 &453732470
