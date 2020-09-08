@@ -23,16 +23,130 @@ MonoBehaviour:
     outputPorts:
     - portName: 306Wall
       direction: 1
-  - roomType: {fileID: 11400000, guid: 979df504de0fa7e489e6464735911a99, type: 2}
-    NodeGUID: e94d1cb7-95e0-4515-9d2f-9d34f9b28fc4
-    MapText: F1 stage
-    Position: {x: 470, y: 124}
+  - roomType: {fileID: 11400000, guid: e617e7193c585d84da39d6fc2f84e589, type: 2}
+    NodeGUID: fdfa5934-adee-40a4-a034-f699c542e327
+    MapText: F3 stage
+    Position: {x: 493, y: 416}
     inputPorts:
-    - portName: 103Out
+    - portName: F3Out
+      direction: 0
+    outputPorts:
+    - portName: 306Out
+      direction: 1
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: 8965344e-d721-4189-bf73-ab6e80fd668c
+    MapText: Room306
+    Position: {x: 531, y: 582}
+    inputPorts:
+    - portName: 306In
+      direction: 0
+    outputPorts:
+    - portName: 306Wall
+      direction: 1
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: 82c9c93c-35fc-4942-a803-395d7d71305c
+    MapText: Room306
+    Position: {x: 966, y: 579}
+    inputPorts:
+    - portName: 306In
+      direction: 0
+    outputPorts:
+    - portName: 306Wall
+      direction: 1
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: c732bb52-8767-4289-a17b-fe6e012f35f3
+    MapText: Room306
+    Position: {x: 1326, y: 430}
+    inputPorts:
+    - portName: 306In
+      direction: 0
+    outputPorts:
+    - portName: 306Wall
+      direction: 1
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: a32a42e6-74ca-4a7c-8c27-4baaf12ad2af
+    MapText: Room306
+    Position: {x: 227, y: 485}
+    inputPorts: []
+    outputPorts:
+    - portName: 306Wall
+      direction: 1
+    - portName: 306In
+      direction: 1
+  - roomType: {fileID: 11400000, guid: e617e7193c585d84da39d6fc2f84e589, type: 2}
+    NodeGUID: b417f241-ba54-4fa7-a1e8-11b11098a42b
+    MapText: F3 stage
+    Position: {x: 497, y: 273}
+    inputPorts:
+    - portName: 306Out
+      direction: 0
+    outputPorts:
+    - portName: F3Out
+      direction: 1
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: 5ddefa89-09ed-4e85-9962-87b36c43f8f6
+    MapText: Room306
+    Position: {x: 451, y: 122}
+    inputPorts:
+    - portName: 306In
+      direction: 0
+    - portName: 306Wall
+      direction: 0
+    outputPorts: []
+  - roomType: {fileID: 11400000, guid: b1be6ab334136a34fa9a55994d71ea94, type: 2}
+    NodeGUID: b6e92165-6b50-4d52-9ac9-788e6cf12198
+    MapText: Room306
+    Position: {x: 185, y: 265}
+    inputPorts: []
+    outputPorts:
+    - portName: 306In
+      direction: 1
+    - portName: 306Wall
+      direction: 1
+  - roomType: {fileID: 11400000, guid: e617e7193c585d84da39d6fc2f84e589, type: 2}
+    NodeGUID: 92307b3f-fc2c-4fec-b221-d45fca4f3b74
+    MapText: F3 stage
+    Position: {x: 948, y: 272}
+    inputPorts:
+    - portName: F3Out
+      direction: 0
+    - portName: 306Out
       direction: 0
     outputPorts: []
   linkdata:
+  - FromNodeGuid: b417f241-ba54-4fa7-a1e8-11b11098a42b
+    outPortName: F3Out
+    TargetNodeGuid: 92307b3f-fc2c-4fec-b221-d45fca4f3b74
+    inPortName: F3Out
+  - FromNodeGuid: fdfa5934-adee-40a4-a034-f699c542e327
+    outPortName: 306Out
+    TargetNodeGuid: 92307b3f-fc2c-4fec-b221-d45fca4f3b74
+    inPortName: 306Out
+  - FromNodeGuid: a32a42e6-74ca-4a7c-8c27-4baaf12ad2af
+    outPortName: 306Wall
+    TargetNodeGuid: fdfa5934-adee-40a4-a034-f699c542e327
+    inPortName: F3Out
+  - FromNodeGuid: a32a42e6-74ca-4a7c-8c27-4baaf12ad2af
+    outPortName: 306In
+    TargetNodeGuid: 8965344e-d721-4189-bf73-ab6e80fd668c
+    inPortName: 306In
+  - FromNodeGuid: 8965344e-d721-4189-bf73-ab6e80fd668c
+    outPortName: 306Wall
+    TargetNodeGuid: 82c9c93c-35fc-4942-a803-395d7d71305c
+    inPortName: 306In
+  - FromNodeGuid: 82c9c93c-35fc-4942-a803-395d7d71305c
+    outPortName: 306Wall
+    TargetNodeGuid: c732bb52-8767-4289-a17b-fe6e012f35f3
+    inPortName: 306In
   - FromNodeGuid: b8a61fd2-c487-40af-ae45-8e2d4bdc4424
     outPortName: 306Wall
-    TargetNodeGuid: e94d1cb7-95e0-4515-9d2f-9d34f9b28fc4
-    inPortName: 103Out
+    TargetNodeGuid: 5ddefa89-09ed-4e85-9962-87b36c43f8f6
+    inPortName: 306In
+  - FromNodeGuid: b6e92165-6b50-4d52-9ac9-788e6cf12198
+    outPortName: 306In
+    TargetNodeGuid: 5ddefa89-09ed-4e85-9962-87b36c43f8f6
+    inPortName: 306Wall
+  - FromNodeGuid: b6e92165-6b50-4d52-9ac9-788e6cf12198
+    outPortName: 306Wall
+    TargetNodeGuid: b417f241-ba54-4fa7-a1e8-11b11098a42b
+    inPortName: 306Out
